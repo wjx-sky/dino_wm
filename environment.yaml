@@ -6,6 +6,7 @@ dependencies:
   - _openmp_mutex=4.5=2_gnu
   - bzip2=1.0.8=hd590300_5
   - ca-certificates=2024.6.2=hbcca054_0
+  - cmake
   - ffmpeg=4.3.2=h37c90e5_3
   - freetype=2.12.1=h267a509_2
   - gmp=6.3.0=h59595ed_1

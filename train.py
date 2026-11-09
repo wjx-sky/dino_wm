@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import hydra
 import torch
@@ -819,4 +820,20 @@ def main(cfg: OmegaConf):
 
 
 if __name__ == "__main__":
+    if "WORLD_SIZE" not in os.environ and torch.cuda.is_available():
+        num_gpus = torch.cuda.device_count()
+        if num_gpus > 1:
+            os.execv(
+                sys.executable,
+                [
+                    sys.executable,
+                    "-m",
+                    "torch.distributed.run",
+                    "--standalone",
+                    "--nnodes=1",
+                    f"--nproc_per_node={num_gpus}",
+                    os.path.abspath(__file__),
+                    *sys.argv[1:],
+                ],
+            )
     main()
